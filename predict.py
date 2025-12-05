@@ -1,9 +1,8 @@
 import pandas as pd
-import numpy as np
+
 
 def main():
     try:
-
         try:
             thetas = pd.read_csv('thetas.csv')
             theta0 = thetas['theta0'][0]
@@ -13,12 +12,17 @@ def main():
             theta0, theta1 = 0.0, 0.0
 
         while True:
-            user_input = input("Entrez le kilometrage : ")
+            user_input = input("Enter mileage : ")
             try:
-                input_as_int = float(user_input)
-            except BaseException:
-                continue
-            break
+                mileage = float(user_input)
+                if mileage < 0:
+                    print("Mileage cannot be negative")
+                    continue
+                break
+            except ValueError:
+                print("error: invalide mileage")
+        estimatePrice = theta0 + (theta1 * mileage)
+        print(f"estimate price {estimatePrice}")
 
     except TypeError as e:
         print(f"TypeError: {str(e)}")
